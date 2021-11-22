@@ -16,6 +16,10 @@ server.listen(PORT,function(){
     console.log("running");
 })
 
+app.get("/",function(req,res){
+    res.send("hello");
+})
+
 // Event
 
 io.on('connection', (socket) => {
