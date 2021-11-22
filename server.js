@@ -6,10 +6,8 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-const http = require("http");
-const server = http.Server(app);
-const {Server} = require("socket.io");
-var io = new Server(server);
+var server = require('http').createServer();
+var io = require('socket.io')(server);
 
 
 server.listen(PORT,function(){
