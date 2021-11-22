@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 
 const http = require('http');
 const server = http.createServer(app);
-const io = require("socket.io")(httpServer, {
+const io = require("socket.io")(server, {
     cors: {
       origin: "http://servermasoi.herokuapp.com/",
       methods: ["GET", "POST"]
