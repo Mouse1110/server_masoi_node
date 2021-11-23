@@ -59,8 +59,7 @@ io.on('connection', (socket) => {
           }
         });
       UserController.getAll().then(function(lUser){
-        socket.emit("chooseCard",false);
-        if (lUser.length > count){
+        if (lUser.length -1 > count){
           socket.emit("chooseCard",false);
           return;
         }
@@ -90,8 +89,7 @@ io.on('connection', (socket) => {
                 lAdmin = [];
                 //Random
                 list.forEach(element=>{
-                  if (list.length <= arr.length){
-                    var random = Math.floor(Math.random() * arr.length);
+                  var random = Math.floor(Math.random() * arr.length);
                   if (element.qt){
                     return;
                   }
@@ -101,7 +99,6 @@ io.on('connection', (socket) => {
                     arr = lFilter;
                   } else{
                     arr[random].count -= 1;
-                  }
                   }
                 });
               });
