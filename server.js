@@ -50,19 +50,20 @@ io.on('connection', (socket) => {
     });
     //  Choose Card
     socket.on("chooseCard",function(data){
-      
-      UserController.getAll().then(function(list){
-        if (list.length > (JSON.parse(data)).length){
+        var list =[];
+        var count = 0; 
+        (JSON.parse(data)).forEach(element=>{
+          if (element.count>0){
+            list.push(element);
+            count += element.count;
+          }
+        });
+      UserController.getAll().then(function(lUser){
+        socket.emit("chooseCard",false);
+        if (lUser.length > count){
           socket.emit("chooseCard",false);
           return;
         }
-        arr = JSON.parse(data);
-        var list =[]; 
-        arr.forEach(element=>{
-          if (element.count>0){
-            list.push(element);
-          }
-        });
         arr = list;
         socket.emit("chooseCard",true);
       });
