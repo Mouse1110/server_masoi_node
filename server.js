@@ -50,7 +50,7 @@ io.on('connection', (socket) => {
     });
     //  Choose Card
     socket.on("chooseCard",function(data){
-      arr = data;
+      arr = JSON.parse(data);
       console.log(arr);
     });
     // SetQT
@@ -74,11 +74,11 @@ io.on('connection', (socket) => {
                 lAdmin = [];
                 //Random
                 list.forEach(element=>{
-                  var random = Math.floor(Math.random()*arr.length);
+                  var random = Math.floor(Math.random() * arr.length);
                   if (element.qt){
                     return;
                   }
-                  io.to(`${element.socket}`).emit('card', random);
+                  io.to(`${element.socket}`).emit('card', arr.length);
                 });
               });
             }
