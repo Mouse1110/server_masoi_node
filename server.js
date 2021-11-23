@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
                   if (element.qt){
                     return;
                   }
-                  io.to(`${element.socket}`).emit('card', arr.length);
+                  io.to(`${element.socket}`).emit('card', arr[random]);
                 });
               });
             }
