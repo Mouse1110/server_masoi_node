@@ -51,6 +51,13 @@ io.on('connection', (socket) => {
     //  Choose Card
     socket.on("chooseCard",function(data){
       arr = JSON.parse(data);
+      var list =[]; 
+      arr.forEach(element=>{
+        if (element.count>0){
+          list.push(element);
+        }
+      });
+      arr = list;
       console.log(arr);
     });
     // SetQT
@@ -78,7 +85,7 @@ io.on('connection', (socket) => {
                   if (element.qt){
                     return;
                   }
-                  io.to(`${element.socket}`).emit('card', arr[random]);
+                  io.to(`${element.socket}`).emit('card', arr.length);
                 });
               });
             }
