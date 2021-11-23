@@ -66,8 +66,13 @@ io.on('connection', (socket) => {
       UserController.updateSS(socket.id).then(function(json){
         UserController.getAll().then(function(data){
           io.to("room").emit("joinroom",data);
+          io.to(`${socket.id}`).emit('card', 1);
         });
       });
+    });
+    // Card
+    socket.on('card',function(){
+
     });
     // Disconnect
     socket.on('disconnect', function() {
