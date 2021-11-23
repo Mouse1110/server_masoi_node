@@ -66,7 +66,23 @@ io.on('connection', (socket) => {
       UserController.updateSS(socket.id).then(function(json){
         UserController.getAll().then(function(data){
           io.to("room").emit("joinroom",data);
-          io.to(`${socket.id}`).emit('card', 1);
+          // Check SS
+          UserController.check().then(function(check){
+            if (check){
+              // Get All Data
+              UserController.getAll().then(function(list){
+                lAdmin = [];
+                //Random
+                list.forEach(element=>{
+                  const random = Math.floor(Math.random()*arr.length);
+                  if (element.qt){
+                    return;
+                  }
+                  io.to(`${element.socket}`).emit('card', arr[random]["id"]);
+                });
+              });
+            }
+          });
         });
       });
     });

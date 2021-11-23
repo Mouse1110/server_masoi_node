@@ -42,3 +42,13 @@ module.exports.updateSS = async function(socket){
     var json = await UserModel.updateOne({socket:socket},{$set:{ss:!data.ss}});
   return json;
 }
+
+module.exports.check = async function(){
+  var list = await UserModel.find({});
+  list.forEach(element=>{
+    if(!element.ss){
+      return false;
+    }
+  });
+  return true;
+}
