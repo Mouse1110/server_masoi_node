@@ -50,15 +50,23 @@ io.on('connection', (socket) => {
     });
     //  Choose Card
     socket.on("chooseCard",function(data){
-      arr = JSON.parse(data);
-      var list =[]; 
-      arr.forEach(element=>{
-        if (element.count>0){
-          list.push(element);
+      
+      UserController.getAll().then(function(list){
+        if (list.length > (JSON.parse(data)).length){
+          socket.emit("chooseCard",false);
+          return;
         }
+        arr = JSON.parse(data);
+        var list =[]; 
+        arr.forEach(element=>{
+          if (element.count>0){
+            list.push(element);
+          }
+        });
+        arr = list;
+        socket.emit("chooseCard",true);
       });
-      arr = list;
-      console.log(arr);
+      
     });
     // SetQT
     socket.on("setQT",function(){
@@ -81,11 +89,19 @@ io.on('connection', (socket) => {
                 lAdmin = [];
                 //Random
                 list.forEach(element=>{
-                  var random = Math.floor(Math.random() * arr.length);
+                  if (list.length <= arr.length){
+                    var random = Math.floor(Math.random() * arr.length);
                   if (element.qt){
                     return;
                   }
-                  io.to(`${element.socket}`).emit('card', arr.length);
+                  io.to(`${element.socket}`).emit('card', arr[random].id);
+                  if (arr[random].count === 1){
+                    var lFilter = arr.filter(element=>element.id === arr[random].id);
+                    arr = lFilter;
+                  } else{
+                    arr[random].count -= 1;
+                  }
+                  }
                 });
               });
             }
