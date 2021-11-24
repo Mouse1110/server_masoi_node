@@ -2,8 +2,13 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const UserController = require("./controller/user.controller");
-
+app.use(express.static("public"));
 app.use(cors());
+
+app.set('view engine','ejs');
+app.set("views","./views");
+
+
 
 const PORT = process.env.PORT || 5000;
 
@@ -18,14 +23,12 @@ const io = require("socket.io")(server, {
   });
 
 
-
-
 server.listen(PORT,function(){
     console.log("running");
 })
 
 app.get("/",function(req,res){
-    res.send("hello");
+    res.render("index");
 })
 
 function setData(id,name,qt,card){
