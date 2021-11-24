@@ -61199,7 +61199,7 @@ return new R.eB(H.b([],s),H.b([new K.ht("S\xf3i","assets/image/werewolf.png","M\
 $S:333}
 U.nN.prototype={}
 R.eB.prototype={
-a6m(){var s,r,q,p,o,n,m=this,l="http://192.168.31.85:5000",k="query",j=t.z,i=P.v(t.N,j)
+a6m(){var s,r,q,p,o,n,m=this,l="http://servermasoi.herokuapp.com/",k="query",j=t.z,i=P.v(t.N,j)
 i.k(0,"transports",H.b(["websocket"],t.i))
 i.k(0,"extraHeaders",P.a8(["foo","bar"],t.bD,j))
 s=P.wG(l)
@@ -61208,7 +61208,7 @@ q=s.gi1(s)
 p=$.a8M.ai(0,r)&&$.a8M.h(0,r).c.ai(0,q)
 o=J.d(i.h(0,"forceNew"),!0)||J.d(i.h(0,"force new connection"),!0)||!1===i.h(0,"multiplex")||p
 n=H.bl("io")
-if(o){$.akQ().az(C.m,"ignoring socket cache for http://192.168.31.85:5000",null,null)
+if(o){$.akQ().az(C.m,"ignoring socket cache for http://servermasoi.herokuapp.com/",null,null)
 n.b=Q.afR(i,l)}else{j=$.a8M.h(0,r)
 if(j==null){j=Q.afR(i,l)
 $.a8M.k(0,r,j)}n.b=j}if(s.gpJ(s).length!==0&&i.h(0,k)==null)i.k(0,k,s.gpJ(s))
